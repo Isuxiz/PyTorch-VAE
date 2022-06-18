@@ -15,6 +15,7 @@ class VanillaVAE(BaseVAE):
                  **kwargs) -> None:
         super(VanillaVAE, self).__init__()
 
+        # 隐变量的维度
         self.latent_dim = latent_dim
 
         modules = []
@@ -32,6 +33,7 @@ class VanillaVAE(BaseVAE):
             )
             in_channels = h_dim
 
+        # encoder 用的是一个带有batch norm的leaky relu激活的CNN
         self.encoder = nn.Sequential(*modules)
         self.fc_mu = nn.Linear(hidden_dims[-1]*4, latent_dim)
         self.fc_var = nn.Linear(hidden_dims[-1]*4, latent_dim)
